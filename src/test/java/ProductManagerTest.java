@@ -30,8 +30,8 @@ public class ProductManagerTest {
         List<Product> products = pm.getProductsByPrice();
         Assert.assertEquals(3.5, products.get(0));
         Assert.assertEquals(3, products.get(1));
-        Assert.assertEquals(2.5, products.get(1));
-        Assert.assertEquals(2, products.get(1));
+        Assert.assertEquals(2.5, products.get(2));
+        Assert.assertEquals(2, products.get(3));
     }
 
     @Test

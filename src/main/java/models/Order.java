@@ -1,13 +1,22 @@
 package models;
 
+import java.util.HashMap;
+
 public class Order {
+    String dni;
+    HashMap<Integer, String> contenido = new HashMap<>();
+
     public Order(String dni) {
+        this.dni = dni;
     }
 
     public void addLP(int i, String s) {
+        this.contenido.put(i,s);
     }
 
     public String getUser() {
+        if(this.dni != null)
+            return this.dni;
         return null;
     }
 }

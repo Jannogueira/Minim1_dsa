@@ -23,17 +23,19 @@ public class ProductManagerImpl implements ProductManager {
 
     @Override
     public List<Product> getProductsByPrice() {
+        productList.sort(Comparator.comparing(Product::getPrice).reversed());
         return productList;
     }
 
     @Override
     public void addOrder(Order order) {
         orderQueue.add(order);
-
     }
 
     @Override
     public int numOrders() {
+        if (!orderQueue.isEmpty())
+            return orderQueue.size();
         return 0;
     }
 
@@ -46,11 +48,14 @@ public class ProductManagerImpl implements ProductManager {
 
     @Override
     public Product getProduct(String c1) {
+
         return null;
     }
 
     @Override
     public User getUser(String number) {
+        if(!this.users.containsKey(number))
+
         return null;
     }
 }
