@@ -7,7 +7,7 @@ import java.util.*;
 public class ProductManagerImpl implements ProductManager {
     private List<Product> productList;
     private Queue<Order> orderQueue;
-    private HashMap<String, User> users;
+    private List<User> userList;
 
 
     public ProductManagerImpl() {
@@ -18,13 +18,14 @@ public class ProductManagerImpl implements ProductManager {
     @Override
     public void addProduct(String id, String name, double price) {
         productList.add(new Product(id, name, price));
-
     }
 
     @Override
     public List<Product> getProductsByPrice() {
-        productList.sort(Comparator.comparing(Product::getPrice).reversed());
-        return productList;
+        List<Product> ordProducts = new ArrayList<>();
+        ordProducts.addAll(productList);
+        Collections.sort(ordProducts, Comparator.comparingDouble(Product::getPrice));
+        return ordProducts;
     }
 
     @Override
@@ -43,6 +44,7 @@ public class ProductManagerImpl implements ProductManager {
     public Order deliverOrder() {
         Order order = orderQueue.poll();
         // TO-DO
+
         return order;
     }
 
@@ -54,8 +56,9 @@ public class ProductManagerImpl implements ProductManager {
 
     @Override
     public User getUser(String number) {
-        if(!this.users.containsKey(number))
-
+        //for(int i; i<users.size(); i++){}
+            //if(users[i].)
+              //  return
         return null;
     }
 }

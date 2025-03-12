@@ -4,18 +4,22 @@ public class Product {
     String id;
     String name;
     double price;
+    int sales;
 
     public Product(String id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.sales = 0;
     }
 
     public int sales() {
-
-
-        return 0;
+        return this.sales;
     }
+    public void addSales(int sales) {
+        this.sales += sales;
+    }
+
     public double getPrice() {
         return this.price;
     }

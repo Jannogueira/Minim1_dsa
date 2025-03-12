@@ -8,10 +8,12 @@ public class Order {
 
     public Order(String dni) {
         this.dni = dni;
+        this.contenido = new HashMap<>();
     }
 
     public void addLP(int i, String s) {
         this.contenido.put(i,s);
+
     }
 
     public String getUser() {
