@@ -24,13 +24,17 @@ public class ProductManagerImpl implements ProductManager {
     public List<Product> getProductsByPrice() {
         List<Product> ordProducts = new ArrayList<>();
         ordProducts.addAll(productList);
-        Collections.sort(ordProducts, Comparator.comparingDouble(Product::getPrice));
+        Collections.sort(ordProducts, Comparator.comparingDouble(Product::getPrice).reversed());
         return ordProducts;
     }
 
     @Override
     public void addOrder(Order order) {
+
         orderQueue.add(order);
+        //userList.add(1, order.getUser());
+
+
     }
 
     @Override
@@ -43,7 +47,6 @@ public class ProductManagerImpl implements ProductManager {
     @Override
     public Order deliverOrder() {
         Order order = orderQueue.poll();
-        // TO-DO
 
         return order;
     }
