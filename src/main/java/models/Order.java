@@ -15,7 +15,9 @@ public class Order {
         this.contenido.put(i,s);
 
     }
-
+    public HashMap<Integer, String> getContenido() {
+        return contenido;
+    }
     public String getUser() {
         if(this.dni != null)
             return this.dni;

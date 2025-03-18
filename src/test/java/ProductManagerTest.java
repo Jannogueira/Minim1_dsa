@@ -59,7 +59,6 @@ public class ProductManagerTest {
     @Test
     public void testSales() {
         testDeliverOrder();
-
         Product p = pm.getProduct("C1");
         Assert.assertEquals(2, p.sales());
     }

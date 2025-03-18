@@ -3,6 +3,7 @@ import models.Product;
 import models.User;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ProductManagerImpl implements ProductManager {
     private List<Product> productList;
@@ -30,11 +31,21 @@ public class ProductManagerImpl implements ProductManager {
 
     @Override
     public void addOrder(Order order) {
-
+        AtomicBoolean encontrado = new AtomicBoolean(false);
         orderQueue.add(order);
-        //userList.add(1, order.getUser());
-
-
+        /*if(!(userList ==null)) {
+            userList.forEach(user -> {
+                if(user.getDni().equals(order.getUser())){
+                    user.setOrder(order);
+                    encontrado.set(true);
+                }
+            });
+        }
+        if(!encontrado.get()) {
+            User nuevoUsuario = new User(order.getUser());
+            nuevoUsuario.setOrder(order);
+            userList.add(nuevoUsuario);
+        }*/
     }
 
     @Override
@@ -47,21 +58,26 @@ public class ProductManagerImpl implements ProductManager {
     @Override
     public Order deliverOrder() {
         Order order = orderQueue.poll();
-
+        order.getContenido().forEach((cantidad, id) -> {
+            Product p = getProduct(id);
+            p.addSales(cantidad);
+        });
         return order;
     }
 
     @Override
     public Product getProduct(String c1) {
-
-        return null;
+        return productList.stream()
+                .filter(p -> p.getId().equals(c1))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public User getUser(String number) {
-        //for(int i; i<users.size(); i++){}
-            //if(users[i].)
-              //  return
-        return null;
+        return userList.stream()
+                .filter(usuario -> usuario.getDni().equals(number))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -19,6 +19,9 @@ public class Product {
     public void addSales(int sales) {
         this.sales += sales;
     }
+    public String getId(){
+        return this.id;
+    }
 
     public double getPrice() {
         return this.price;
