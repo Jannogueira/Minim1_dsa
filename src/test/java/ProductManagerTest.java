@@ -8,6 +8,16 @@ import org.junit.Test;
 
 import java.util.List;
 
+import models.Order;
+import models.Product;
+import models.User;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.List;
+
 public class ProductManagerTest {
     ProductManager pm;
 
@@ -17,7 +27,7 @@ public class ProductManagerTest {
         pm.addProduct("C1", "Coca-cola zero", 2);
         pm.addProduct("C2", "Coca-cola", 2.5);
         pm.addProduct("B1", "Lomo queso", 3);
-        pm.addProduct("C1", "bacon queso", 3.5);
+        pm.addProduct("B2", "bacon queso", 3.5);
     }
 
     @After
@@ -28,10 +38,10 @@ public class ProductManagerTest {
     @Test
     public void testProductByPrice() {
         List<Product> products = pm.getProductsByPrice();
-        Assert.assertEquals(3.5, products.get(0).getPrice(),0.5);
-        Assert.assertEquals(3, products.get(1).getPrice(),0.5);
-        Assert.assertEquals(2.5, products.get(2).getPrice(),0.5);
-        Assert.assertEquals(2, products.get(3).getPrice(),0.5);
+        Assert.assertEquals(3.5, products.get(0).getPrice(),0);
+        Assert.assertEquals(3, products.get(1).getPrice(), 0);
+        Assert.assertEquals(2.5, products.get(2).getPrice(), 0);
+        Assert.assertEquals(2, products.get(3).getPrice(), 0);
     }
 
     @Test
@@ -59,6 +69,7 @@ public class ProductManagerTest {
     @Test
     public void testSales() {
         testDeliverOrder();
+
         Product p = pm.getProduct("C1");
         Assert.assertEquals(2, p.sales());
     }

@@ -14,11 +14,13 @@ public class ProductManagerImpl implements ProductManager {
     public ProductManagerImpl() {
         productList = new ArrayList<>();
         orderQueue = new LinkedList<>();
+        userList = new ArrayList<>();
     }
 
     @Override
     public void addProduct(String id, String name, double price) {
-        productList.add(new Product(id, name, price));
+        if (productList.stream().noneMatch(p -> p.getId().equals(id)))
+            productList.add(new Product(id, name, price));
     }
 
     @Override
@@ -33,20 +35,28 @@ public class ProductManagerImpl implements ProductManager {
     public void addOrder(Order order) {
         AtomicBoolean encontrado = new AtomicBoolean(false);
         orderQueue.add(order);
-        /*if(!(userList ==null)) {
+        Order o = new Order(order.getUser());
+        order.getContenido().forEach((cantidad, id) -> {
+            if (getProduct(id) != null) {
+                o.addLP(cantidad, id);
+            }
+        });
+
+        if (userList != null && !userList.isEmpty()) {
             userList.forEach(user -> {
-                if(user.getDni().equals(order.getUser())){
-                    user.setOrder(order);
+                if (user != null && user.getDni().equals(order.getUser())) {
+                    user.setOrder(o);
                     encontrado.set(true);
                 }
             });
         }
-        if(!encontrado.get()) {
-            User nuevoUsuario = new User(order.getUser());
-            nuevoUsuario.setOrder(order);
+        if (!encontrado.get()) {
+            User nuevoUsuario = new User(o.getUser());
+            nuevoUsuario.setOrder(o);
             userList.add(nuevoUsuario);
-        }*/
+        }
     }
+
 
     @Override
     public int numOrders() {
@@ -58,6 +68,9 @@ public class ProductManagerImpl implements ProductManager {
     @Override
     public Order deliverOrder() {
         Order order = orderQueue.poll();
+        if (order == null) {
+            return null;
+        }
         order.getContenido().forEach((cantidad, id) -> {
             Product p = getProduct(id);
             p.addSales(cantidad);
