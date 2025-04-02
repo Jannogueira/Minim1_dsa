@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Order {
     String dni;
-    HashMap<Integer, String> contenido = new HashMap<>();
+    HashMap<Integer, String> contenido;
 
     public Order(String dni) {
         this.dni = dni;

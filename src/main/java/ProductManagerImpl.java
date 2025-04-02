@@ -73,7 +73,8 @@ public class ProductManagerImpl implements ProductManager {
         }
         order.getContenido().forEach((cantidad, id) -> {
             Product p = getProduct(id);
-            p.addSales(cantidad);
+            if(p!=null)
+                p.addSales(cantidad);
         });
         return order;
     }

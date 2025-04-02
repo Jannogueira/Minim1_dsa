@@ -8,7 +8,7 @@ public class User {
     List<Order> orders = new ArrayList<Order>();
     public User(String dni) {
         this.dni = dni;
-        this.orders = null;
+        this.orders = new ArrayList<>();
     }
 
     public List<Order> orders() {
